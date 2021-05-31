@@ -1,1 +1,1 @@
-rm build.zip && zip -x ".*" -r build.zip .
+rm build.zip && zip -x ".*" -x build.sh -r build.zip .
