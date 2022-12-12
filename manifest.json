@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Miniflux RSS Notifier",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "incognito": "not_allowed",
   "description": "Shows a badge with unread in your Miniflux instance.",
   "icons": {
