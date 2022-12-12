@@ -13,7 +13,17 @@ const createUnreadCountRequest = async () => {
 };
 
 const checkUnreadCount = async () => {
-  console.log("Checking Miniflux unread count");
+  console.log("checking Miniflux unread count");
+  const storage = await browser.storage.local.get({
+    apikey: "",
+    url: "",
+  });
+
+  if (!storage.url || !storage.apikey) {
+    console.log('miniflux Notifier not configured, skipping unread count')
+    return
+  }
+
   const request = await createUnreadCountRequest();
 
   fetch(request)
@@ -22,12 +32,13 @@ const checkUnreadCount = async () => {
     })
     .then(handleResponse)
     .catch((err) => {
-      console.error("Error while fetching unread count", err);
+      console.error("error while fetching unread count", err);
     });
 };
 
 const handleResponse = (response) => {
   if (response && response.total) {
+    console.log(`unread count fetched, ${response.total} unread`)
     displayBrowserActionBadge(response.total.toString());
   } else {
     displayBrowserActionBadge("");
@@ -44,7 +55,7 @@ const displayBrowserActionBadge = (number) => {
 };
 
 const onBrowserActionClick = async () => {
-  console.log("Opening Miniflux in new tab");
+  console.log("opening Miniflux in new tab");
 
   const storage = await browser.storage.local.get({
     apikey: "",
@@ -52,11 +63,11 @@ const onBrowserActionClick = async () => {
   });
 
   var creating = browser.tabs.create({
-    url: storage.url,
+    url: storage.url || browser.runtime.getURL("/options.html"),
   });
   creating.then(
     () => {
-      console.log("Opened in new");
+      console.log("opened in new");
     },
     (err) => {
       console.log("error tabbing");

@@ -24,7 +24,7 @@ async function restoreOptions() {
     setUrl(storage.url);
     setApiKey(storage.apikey);
   } catch (err) {
-    console.log(`Error: ${err}`);
+    console.log(`error: ${err}`);
   }
 }
 
