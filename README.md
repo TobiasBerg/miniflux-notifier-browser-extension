@@ -1,3 +1,3 @@
 # Miniflux Notification Firefox Addon
 
-Simple Firefox extension which shows unread conter in the toolbar.
+Simple Firefox extension which shows unread counter in the toolbar.
